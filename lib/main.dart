@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,6 +23,18 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class Counter extends Cubit<int> {
+  Counter() : super(0); //initial value
+
+  void incerement() {
+    emit(state + 1);
+  }
+
+  void decrement() {
+    emit(state - 1);
+  }
+}
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -34,32 +47,43 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Widget Rebuild');
+    final myCounter = Counter();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
         backgroundColor: Colors.blue,
         centerTitle: true,
       ),
-      body: StreamBuilder(
-        stream: count(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: Text(
-                'Loading ..',
-                style: TextStyle(fontSize: 50),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          StreamBuilder(
+            stream: myCounter.stream,
+            builder: (context, snapshot) {
+              return SizedBox(
+                child: Text(
+                  '${snapshot.data}',
+                  style: const TextStyle(fontSize: 50),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                onPressed: () => myCounter.decrement(),
+                icon: const Icon(Icons.remove),
               ),
-            );
-          } else {
-            return Center(
-              child: Text(
-                '${snapshot.data}',
-                style: const TextStyle(fontSize: 50),
+              IconButton(
+                onPressed: () => myCounter.incerement(),
+                icon: const Icon(Icons.add),
               ),
-            );
-          }
-        },
+            ],
+          )
+        ],
       ),
     );
   }
