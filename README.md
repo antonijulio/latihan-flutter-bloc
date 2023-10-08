@@ -10,4 +10,4 @@ Repo sebagai dokumentasi saya belajar state management BloC Flutter
 
 ## #2 Basic Cubit
 
-![basic cubit pic](pic/basic_cubit.png)
+![basic cubit pic](pic/basic_cubit.gif)
