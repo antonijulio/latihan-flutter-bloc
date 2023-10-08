@@ -51,8 +51,6 @@ void onChange(Change<int> change) {
 }
 ```
 
-![obs cubit pic](pic/observer_cubit.gif)
-
 ## #4 Bloc Builder
 
 - Adalah widget yang digunakan dalam Flutter untuk mengintegrasikan `BLoC` dengan ui.
@@ -65,7 +63,7 @@ stream: myBloc.stream,
 - `BlocBuilder` dirancang khusus untuk bekerja dengan BLoC, yang memisahkan logika bisnis dari tampilan.
 - Terdapat 2 parameter penting yaitu `bloc` (bloc class) & `builder` (state yang dibangun).
 - Dan terdapat satu parameter uniq dalam `BlocBuilder` yaitu `buildWhen` (Mengontrol kondisi kapan builder function dalam `BlocBuilder` harus dipanggil).
-- contoh implementasi sederhana `BlockBuilder` dengan studi kasus hanya ingin mencetak angka genap:
+- Contoh implementasi sederhana `BlockBuilder` dengan studi kasus hanya ingin mencetak angka genap:
 
 ```
 BlocBuilder<CounterBlock, int>(
@@ -87,3 +85,37 @@ BlocBuilder<CounterBlock, int>(
 ```
 
 ![bloc builder pic](pic/bloc_builder.gif)
+
+## #5 Bloc Listener
+
+- `BlocListener` adalah sebuah widget yang digunakan untuk **mendengarkan perubahan dalam Bloc yang terkait** dan menjalankan tindakan tertentu saat perubahan terjadi.
+- Memiliki properti uniq `listenWhen` yang fungsinya sama seperti `buildWhen` pada `BlockBuilder` yaitu state akan dijalankan ketika ada kondisi tertentu.
+- Contoh implementasi sederhana `BlocListener`, ketika state berubah maka akan muncul snackBar:
+
+```
+/**
+ * blockListener mendengarkan -> blockBuilder
+ * listener akan merespon dalam bentuk snackbar
+ */
+BlocListener<CounterBloc, int>(
+  bloc: myCounter,
+  listener: (context, state) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Dijalankan'),
+      ),
+    );
+  },
+  child: BlocBuilder<CounterBloc, int>(
+    bloc: myCounter,
+    builder: (context, state) {
+      return Text(
+        '$state',
+        style: const TextStyle(fontSize: 50),
+      );
+    },
+  ),
+),
+```
+
+![bloc listener pic](pic/bloc_listener.gif)
