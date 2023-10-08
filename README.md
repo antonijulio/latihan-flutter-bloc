@@ -6,4 +6,8 @@ Repo sebagai dokumentasi saya belajar state management BloC Flutter
 
 - Adalah cara untuk mengirim dan menerima data secara asinkron. `Stream` ini bekerja seperti aliran data yang terus menerus mengalir dari satu sumber ke sumber lainnya.
 
-![stream](pic/observer_cubit.gif)
+![stream pic](pic/stream.png)
+
+## #2 Basic Cubit
+
+![basic cubit pic](pic/basic_cubit.png)
