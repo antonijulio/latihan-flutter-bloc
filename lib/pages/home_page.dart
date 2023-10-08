@@ -19,32 +19,30 @@ class HomePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BlocBuilder<CounterBloc, int>(
+          /**
+           * blockListener mendengarkan -> blockBuilder
+           * listener akan merespon dalam bentuk snackbar
+           */
+          BlocListener<CounterBloc, int>(
             bloc: myCounter,
-            buildWhen: (previous, current) {
-              if (current % 2 == 0) {
-                return true; //true = mencetak
-              } else {
-                return false; //false = tidak mencetak
-              }
-            },
-            builder: (context, state) {
-              return Text(
-                '$state',
-                style: const TextStyle(fontSize: 50),
+            listener: (context, state) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  duration: Duration(milliseconds: 100),
+                  content: Text('Dijalankan'),
+                ),
               );
             },
+            child: BlocBuilder<CounterBloc, int>(
+              bloc: myCounter,
+              builder: (context, state) {
+                return Text(
+                  '$state',
+                  style: const TextStyle(fontSize: 50),
+                );
+              },
+            ),
           ),
-          // StreamBuilder(
-          //   initialData: myCounter.init,
-          //   stream: myCounter.stream,
-          //   builder: (context, snapshot) {
-          //     return Text(
-          //       '${snapshot.data}',
-          //       style: const TextStyle(fontSize: 50),
-          //     );
-          //   },
-          // ),
           const SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
