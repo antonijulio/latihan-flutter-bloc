@@ -88,7 +88,7 @@ BlocBuilder<CounterBlock, int>(
 
 ## #5 Bloc Listener
 
-- `BlocListener` adalah sebuah widget yang digunakan untuk **mendengarkan perubahan dalam Bloc yang terkait** dan menjalankan tindakan tertentu saat perubahan terjadi.
+- `BlocListener` adalah sebuah widget yang digunakan untuk _mendengarkan perubahan dalam Bloc yang terkait_ dan menjalankan tindakan tertentu saat perubahan terjadi.
 - Memiliki properti uniq `listenWhen` yang fungsinya sama seperti `buildWhen` pada `BlockBuilder` yaitu state akan dijalankan ketika ada kondisi tertentu.
 - Contoh implementasi sederhana `BlocListener`, ketika state berubah maka akan muncul snackBar:
 
