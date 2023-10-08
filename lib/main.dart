@@ -33,6 +33,18 @@ class Counter extends Cubit<int> {
   void decrement() {
     emit(state - 1);
   }
+
+  // fitur memantau data
+
+  int? current;
+  int? next;
+
+  @override
+  void onChange(Change<int> change) {
+    super.onChange(change);
+    current = change.currentState;
+    next = change.nextState;
+  }
 }
 
 class HomePage extends StatelessWidget {
@@ -61,11 +73,21 @@ class HomePage extends StatelessWidget {
           StreamBuilder(
             stream: myCounter.stream,
             builder: (context, snapshot) {
-              return SizedBox(
-                child: Text(
-                  '${snapshot.data}',
-                  style: const TextStyle(fontSize: 50),
-                ),
+              return Column(
+                children: [
+                  Text(
+                    '${snapshot.data}',
+                    style: const TextStyle(fontSize: 50),
+                  ),
+                  Text(
+                    'current: ${myCounter.current}',
+                    style: const TextStyle(fontSize: 50),
+                  ),
+                  Text(
+                    'next: ${myCounter.next}',
+                    style: const TextStyle(fontSize: 50),
+                  ),
+                ],
               );
             },
           ),
