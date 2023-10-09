@@ -119,3 +119,29 @@ BlocListener<CounterBloc, int>(
 ```
 
 ![bloc listener pic](pic/bloc_listener.gif)
+
+## #6 Bloc Consumer
+
+- Secara sederhana `BlocConsumer` adalah gabungan antara `BlocBuilder` dan `BlocListener`.
+- Di dalam `BlocConsumer` terdapat properti penting yaitu: `builder`, `buildWhen`, `listen`, dan `listenWhen`.
+- Contoh implementasi sederhana `BlocConsumer`, ketika state berubah maka akan muncul snackBar:
+
+```
+BlocConsumer<CounterBloc, int>(
+  bloc: myCounter,
+  builder: (context, state) {
+    return Text(
+      '$state',
+      style: const TextStyle(fontSize: 50),
+    );
+  },
+  listener: (context, state) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        duration: Duration(milliseconds: 100),
+        content: Text('Dijalankan'),
+      ),
+    );
+  },
+),
+```
