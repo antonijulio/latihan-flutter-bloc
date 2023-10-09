@@ -23,8 +23,14 @@ class HomePage extends StatelessWidget {
            * blockListener mendengarkan -> blockBuilder
            * listener akan merespon dalam bentuk snackbar
            */
-          BlocListener<CounterBloc, int>(
+          BlocConsumer<CounterBloc, int>(
             bloc: myCounter,
+            builder: (context, state) {
+              return Text(
+                '$state',
+                style: const TextStyle(fontSize: 50),
+              );
+            },
             listener: (context, state) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
@@ -33,15 +39,6 @@ class HomePage extends StatelessWidget {
                 ),
               );
             },
-            child: BlocBuilder<CounterBloc, int>(
-              bloc: myCounter,
-              builder: (context, state) {
-                return Text(
-                  '$state',
-                  style: const TextStyle(fontSize: 50),
-                );
-              },
-            ),
           ),
           const SizedBox(height: 50),
           Row(
