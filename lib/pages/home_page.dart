@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latihan_bloc/bloc/counter_bloc.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+import 'package:latihan_bloc/pages/widget/data_state_widget.dart';
 
-  // counter bloc
-  final CounterBloc myCounter = CounterBloc();
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //bloc provider
+    final myCounter = BlocProvider.of<CounterBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bloc Builder'),
@@ -19,27 +21,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          /**
-           * blockListener mendengarkan -> blockBuilder
-           * listener akan merespon dalam bentuk snackbar
-           */
-          BlocConsumer<CounterBloc, int>(
-            bloc: myCounter,
-            builder: (context, state) {
-              return Text(
-                '$state',
-                style: const TextStyle(fontSize: 50),
-              );
-            },
-            listener: (context, state) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  duration: Duration(milliseconds: 100),
-                  content: Text('Dijalankan'),
-                ),
-              );
-            },
-          ),
+          const DataState(),
           const SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
