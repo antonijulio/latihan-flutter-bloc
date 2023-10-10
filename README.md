@@ -196,3 +196,5 @@ Navigator.of(context).push(
   ),
 );
 ```
+
+![bloc listener pic](pic/bloc_provider_value.gif)
