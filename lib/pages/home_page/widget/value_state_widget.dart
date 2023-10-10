@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:latihan_bloc/bloc/counter_bloc.dart';
 
@@ -16,7 +17,11 @@ class ValueState extends StatelessWidget {
       builder: (context, state) {
         return Text(
           '$state',
-          style: const TextStyle(fontSize: 50),
+          style: GoogleFonts.poppins(
+            fontSize: 50,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueGrey.shade700,
+          ),
         );
       },
     );

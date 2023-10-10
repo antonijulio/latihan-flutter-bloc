@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latihan_bloc/bloc/counter_bloc.dart';
 
-import 'package:latihan_bloc/pages/widget/data_state_widget.dart';
+import 'package:latihan_bloc/pages/home_page/widget/data_state_widget.dart';
+import 'package:latihan_bloc/pages/value/value_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bloc Builder'),
+        title: const Text('Home'),
         backgroundColor: Colors.blue.shade300,
         centerTitle: true,
       ),
@@ -41,6 +42,19 @@ class HomePage extends StatelessWidget {
             ],
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => BlocProvider.value(
+                value: myCounter,
+                child: const ValuePage(),
+              ),
+            ),
+          );
+        },
+        child: const Icon(Icons.arrow_forward),
       ),
     );
   }
