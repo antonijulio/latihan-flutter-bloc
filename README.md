@@ -145,3 +145,38 @@ BlocConsumer<CounterBloc, int>(
   },
 ),
 ```
+
+## #7 Bloc Provider
+
+- Muncul atas permasalahan ketika kita memecah suatu widget maka widget yang di pecah tersebut akan membutuhkan data dari widget yang diatasnya dengan cara melempar data menggunakan construktor, dari kejadian tersebut maka `BlocProvider` digunakan agar membuat code kita menjadi efisien.
+- Dari code sebelumnya kita akan memecah widget state menjadi 2 bagian yang terpisah dimulai dari `HomePage`: 1. `DataState` berisi container dengan child widget `ValueState`, 2. `ValueState` berisi nilai state yang berubah pada tampilan ui.
+- Alur widget nya yaitu: `MaterialApp` -> `Scaffold` -> `Box` -> `Text`.
+- Berikut implementasi sederhananya:
+
+Daftarkan `BlocProvider` pada `MaterialApp`
+
+```
+BlocProvider(
+  create: (context) => MyBlocProvider(),
+  child: MaterialApp(
+    home: MyHomePage(),
+  ),
+);
+```
+
+Gunakan pada setiap widget yang membutuhkan data state
+
+```
+//inisiasi objek Bloc class
+final myCounter = BlocProvider.of<CounterBloc>(context);
+
+return BlocBuilder<CounterBloc, int>(
+  bloc: myCounter,
+  builder: (context, state) {
+    return Text(
+      '$state',
+      style: const TextStyle(fontSize: 50),
+    );
+  },
+);
+```
