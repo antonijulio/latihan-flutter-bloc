@@ -180,3 +180,19 @@ return BlocBuilder<CounterBloc, int>(
   },
 );
 ```
+
+## #8 Bloc Provider Value
+
+- Mengabil nilai dari halaman HomePage dan ditampilkan di halaman ValueDetail `BlocProvider.value()`,
+- berikut implementasi sederhananya:
+
+```
+Navigator.of(context).push(
+  MaterialPageRoute(
+    builder: (context) => BlocProvider.value(
+      value: myCounter,
+      child: const ValuePage(),
+    ),
+  ),
+);
+```
